@@ -35,7 +35,9 @@ class _LoginState extends State<Login> {
                     ),
                     loginTopInfo(),
                     userNameInput(),
-                    passWordInput()
+                    passWordInput(),
+                    loginButton(),
+                    findPassAndRegister()
                   ])
             ])
     );
@@ -51,7 +53,7 @@ class _LoginState extends State<Login> {
           maxLines:1,
           style: new TextStyle(
             color: Colours.app_login_top_info,
-            fontSize: 25.0,
+            fontSize: 20.0,
           )
       ),
     );
@@ -67,37 +69,36 @@ class _LoginState extends State<Login> {
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey, width: 1.0),
             borderRadius: BorderRadius.circular(50.0)),
-        child: new Row(
-            children: <Widget>[
-              new Expanded(
-                  child: new TextField(
-                    controller: _userNameController,
-                    decoration: new InputDecoration(
-                        hintText: "请输入用户名",
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.account_box,
-                          color:Colours.app_login_top_info ,
-                        ),
-                        suffixIcon: new IconButton(
-                          color:Colours.app_login_top_info ,
-                         // padding: EdgeInsets.all(1.0),
-                          icon: new Icon(Icons.clear),
-                          iconSize:20,
-                          onPressed: (){
-                            _userNameController.clear();
-                          } ,
-                        )
-                    ),
-                    maxLines:1,
-                    textAlign: TextAlign.left,//设置内容显示位置是否居中等
-                    style: new TextStyle(
-                      fontSize: 15.0,
-                      color: Colors.black,
-                    ),
-                    autofocus: true,//自动获取焦点
+            child: new TextField(
+              controller: _userNameController,
+              decoration: new InputDecoration(
+                  hintText: "请输入用户名",
+                  hintStyle:TextStyle(
+                    color: Colours.app_gray,
+                    fontSize: 16,
+                  ),
+                  border: InputBorder.none,
+                  prefixIcon: Icon(Icons.account_box,
+                    color:Colours.app_login_top_info ,
+                  ),
+                  suffixIcon: new IconButton(
+                    color:Colours.app_login_top_info ,
+                   // padding: EdgeInsets.all(1.0),
+                    icon: new Icon(Icons.clear),
+                    iconSize:20,
+                    onPressed: (){
+                      _userNameController.clear();
+                    } ,
                   )
               ),
-            ])
+              maxLines:1,
+              textAlign: TextAlign.left,//设置内容显示位置是否居中等
+              style: new TextStyle(
+                fontSize: 16.0,
+                color: Colors.black,
+              ),
+              //autofocus: true,//自动获取焦点
+            )
     );
   }
 
@@ -112,38 +113,110 @@ class _LoginState extends State<Login> {
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey, width: 1.0),
             borderRadius: BorderRadius.circular(50.0)),
-        child: new Row(
-            children: <Widget>[
-              new Expanded(
-                  child: new TextField(
-                    controller: _userPassController,
-                    decoration: new InputDecoration(
-                        hintText: "请输入密码",
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.lock,
-                          color:Colours.app_login_top_info ,
-                        ),
-                        suffixIcon: new IconButton(
-                          color:Colours.app_login_top_info ,
-                          // padding: EdgeInsets.all(1.0),
-                          icon: new Icon(Icons.clear),
-                          iconSize:20,
-                          onPressed: (){
-                            _userPassController.clear();
-                          } ,
-                        )
-                    ),
-                    maxLines:1,
-                    textAlign: TextAlign.left,//设置内容显示位置是否居中等
-                    style: new TextStyle(
-                      fontSize: 15.0,
-                      color: Colors.black,
-                    ),
-                    autofocus: true,//自动获取焦点
-                    obscureText: true,
+            child: new TextField(
+              controller: _userPassController,
+              decoration: new InputDecoration(
+                  hintText: "请输入密码",
+                  hintStyle:TextStyle(
+                    color: Colours.app_gray,
+                    fontSize: 16,
+                  ),
+                  border: InputBorder.none,
+                  prefixIcon: Icon(Icons.lock,
+                    color:Colours.app_login_top_info ,
+                  ),
+                  suffixIcon: new IconButton(
+                    color:Colours.app_login_top_info ,
+                    // padding: EdgeInsets.all(1.0),
+                    icon: new Icon(Icons.clear),
+                    iconSize:20,
+                    onPressed: (){
+                      _userPassController.clear();
+                    } ,
                   )
               ),
-            ])
+              maxLines:1,
+              textAlign: TextAlign.left,//设置内容显示位置是否居中等
+              style: new TextStyle(
+                fontSize: 16.0,
+                color: Colors.black,
+              ),
+              //autofocus: true,//自动获取焦点
+              obscureText: true,
+            )
+    );
+  }
+
+  /*
+  登陆按钮
+ */
+  Widget loginButton(){
+    return new Container(
+        width: 360.0,
+        margin: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 20.0),
+        //padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+        child:  new FlatButton(
+                color: Colors.red,
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: Colors.red,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(50)),
+                onPressed: () {
+                  print("the pass is" + _userNameController.text);
+                },
+                child: new Padding(
+                  padding: new EdgeInsets.all(10.0),
+                  child: new Text(
+                    '马上登录',
+                    style:
+                    new TextStyle(color: Colors.white, fontSize: 16.0),
+                  ),
+                )
+            )
+
+    );
+  }
+
+
+  /*
+  注册和找回密码
+ */
+  Widget findPassAndRegister(){
+    return new Container(
+        width: 200.0,
+        margin: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 20.0),
+        //padding: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+        child: new Row(
+        children: <Widget>[
+            new Expanded(
+              child: new Text('账号注册',
+                  textAlign: TextAlign.center,
+                  style: new TextStyle(
+                    fontSize: 16.0,
+                    color: Colours.app_register_info,
+                  ),
+              ),
+            ),
+            new Text('|',
+                textAlign: TextAlign.center,
+                style: new TextStyle(
+                fontSize: 16.0,
+                color: Colours.app_gray,
+                ),
+            ),
+            new Expanded(
+              child: new Text('密码登陆',
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                      fontSize: 16.0,
+                      color: Colours.app_register_info,
+                    ),
+              ),
+            ),
+        ])
+
     );
   }
 }
